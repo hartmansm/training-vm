@@ -8,8 +8,9 @@ Differing from the normal VM,
 this version is based on the `aarch64` architecture.
 
 As VirtualBox does not support Apple Silicon based Macs yet,
-you will have to use [UTM](https://github.com/utmapp/UTM).
-You can download it for free from Github or buy it via the AppStore.
+you can use [UTM](https://github.com/utmapp/UTM).
+You can download it for free from Github or from [UTM](https://mac.getutm.app) 
+or buy it via the AppStore.
 
 The recipe was set up using UTM 4.4.5
 on a Macbook Air M2 using MacOS 14.1.1,
@@ -72,23 +73,31 @@ the installation will take some time.
 Once it is finished and you restart the VM,
 the freshly installed Linux system should boot.
 
-*For currently unknown reasons
-you might end up with a VM which does not boot into the installed Linux,
-but will still only allow to boot into the provided installtion image.
-See the discussion in
+After the installation, stop the VM and, from
+the UTM control window, clear the ISO image from
+the CD/DVD setting and then restart the VM. If
+the Linux system still does not boot, see the discussion in
 [PR #14](https://github.com/epics-training/training-vm/pull/14)
-for more details.*
+for more details.
 
 ## Update the system
 
 Become root and enable EPEL and update the system.
 
+**Warning:** the update will overwite the initial grub boot configuration, rendering the system un-bootable. 
+
 ```bash
 sudo -i
 dnf install -y epel-release && dnf update -y --refresh
 ```
+Restore the original grub boot configuration now, before rebooting:
 
-Reboot (important!).
+```sudo cp /boot/efi/EFI/rocky/grub.cfg.rpmsave /boot/efi/EFI/rocky/grub.cfg```
+
+*TBD: Is this the best way to restore the grub configuration?* 
+*TBD: Does this need to be done every time after updating?*
+
+Now reboot.
 
 ## Allow passwordless sudo
 
