@@ -7,8 +7,10 @@ for the EPICS Training from scratch.
 The recipe was set up using VirtualBox 7.0.14 on Windows 10,
 but it should work similarly on other versions and host systems.
 
-*This will not work for Applie Silicon based Macs. Follow
-[these instructions](/doc/creating-vm-from-scratch-apple-silicon.md) for an alternative.*
+VirtualBox >=7.1 now supports Apple Silicon based Macs. 
+The following instructions work, but note issues #12 and #13. 
+For an alternative option, see
+[these instructions](/doc/creating-vm-from-scratch-apple-silicon.md).
 
 ## Create the VM
 
@@ -86,12 +88,12 @@ Create a snapshot *"9.4 with Guest Additions <VBox version>"*.
 
 The remaining steps are done as the regular user.
 
-Copy the script `bootstrap_redhat.sh` onto the VM and run it.
+Copy the script `bootstrap.sh` onto the VM and run it.
 (Preferably from your home directory.)
 
 E.g. (in one audacious step)
 ```
-$ eval "$(curl -L https://raw.githubusercontent.com/epics-training/training-vm/main/bootstrap_redhat.sh)"
+$ eval "$(curl -L https://raw.githubusercontent.com/epics-training/training-vm/main/bootstrap.sh)"
 ```
 
 This will first make sure the required software is installed (git, ansible).
